@@ -1,8 +1,9 @@
 
 
-const baseURL = "https://rickandmortyapi.com/api/character/";
+const baseURL = "https://rickandmortyapi.com/api/";
 
 let url;
+let firstEpisode;
 
 const getInfo = document.querySelector("form");
 const img = document.querySelector("img");
@@ -11,7 +12,7 @@ const ul = document.querySelector("ul");
 const div = document.querySelector("div");
 let div1 = document.querySelector(".card");
 
-
+let ep;
 let characterNumber = document.querySelector("input");
 
 getInfo.addEventListener("submit", fetchCharacters);
@@ -20,21 +21,35 @@ function fetchCharacters(e) {
     e.preventDefault();
 
     console.log(e);
-    url = baseURL + characterNumber.value + "/";
-  console.log(url)
+    url = baseURL + "character/" + characterNumber.value + "/";
+    console.log(url)
     fetch(url).then(function(results) {
         console.log(results);
         return results.json();
     }).then(function(json) {
+        
         displayResults(json);
     });
 }
 
 function displayResults(json) {
+    let episode1 = json.episode[0];
+    fetch(episode1).then(function(results) {
+        console.log(results);
+        return results.json();
+    }).then(function(json) {
+        console.log(json.episode);  
+    });
+
+    
     
     while(div1.firstChild) {
         div1.removeChild(div1.firstChild);   
     }
+
+    
+    
+   
 
     console.log(json);
     let characters = json.name;
@@ -44,9 +59,13 @@ function displayResults(json) {
     let characterSpecies = json.species;
     let characterOrigin = json.origin;
     
+    
+    
+    
     console.log(characters);
     console.log(characterID);
     console.log(characterStatus);
+    // console.log(firstEpisode);
 
     //Trying to display character stats
     let div2 = document.createElement("div");
@@ -56,6 +75,8 @@ function displayResults(json) {
     let gender = document.createElement("p");
     let species = document.createElement("p");
     let origin = document.createElement("p");
+    let episode = document.createElement("p");
+    
  
     img.src = json.image;
     heading.innerHTML = json.name;
@@ -63,7 +84,8 @@ function displayResults(json) {
     gender.innerHTML = "<p><span>Gender</span>: <em>" + characterGender + "</em></p><hr>";
     species.innerHTML = "<p><span>Species</span>: <em>" + characterSpecies + "</em></p><hr>";
     origin.innerHTML = "<p><span>Origin</span>: <em>" + characterOrigin.name + "</em></p><hr>";
-    
+    episode.innerHTML = "<p><span>First ep</span>: <em>" + ep + "</em></p><hr>";
+
     // div.setAttribute("class", "slide-up");
     div1.appendChild(div2);
     div2.setAttribute("class", "cardbox");
@@ -75,4 +97,5 @@ function displayResults(json) {
     div2.appendChild(gender);
     div2.appendChild(origin);
     div2.appendChild(status);
+    div2.appendChild(episode);
 } 
