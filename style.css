@@ -46,7 +46,7 @@ form input {
     background-repeat: no-repeat;
     background-position: center;
     /* background-attachment: fixed; */
-    animation-duration: 50s;
+    animation-duration: 75s;
     animation-name: spin;
     /* border: solid 3px white; */
 }
@@ -86,7 +86,7 @@ form input {
 }
 .cardbox p {
     /* display: inline; */
-    margin: 10px;
+    margin: 5px;
     padding: 0px;
 }
 .cardbox span {

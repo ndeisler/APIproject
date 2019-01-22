@@ -20,11 +20,11 @@ getInfo.addEventListener("submit", fetchCharacters);
 function fetchCharacters(e) {
     e.preventDefault();
 
-    console.log(e);
+    // console.log(e);
     url = baseURL + "character/" + characterNumber.value + "/";
-    console.log(url)
+    // console.log(url)
     fetch(url).then(function(results) {
-        console.log(results);
+        // console.log(results);
         return results.json();
     }).then(function(json) {
         
@@ -39,7 +39,7 @@ function displayResults(json) {
 
     let episode1 = json.episode[0];
     fetch(episode1).then(function(results) {
-        console.log(results);
+        // console.log(results);
         return results.json();
     }).then(function(json2) {
         // console.log(json2.episode); 
@@ -78,13 +78,8 @@ function displayResults(json) {
         div2.appendChild(origin);
         div2.appendChild(episode);
         div2.appendChild(status);
-
-
-        
     });
 
-    // let characters = json.name;
-    // let characterID = json.id;
     let characterStatus = json.status;
     let characterGender = json.gender;
     let characterSpecies = json.species;
