@@ -128,3 +128,7 @@ form input {
     }
   }
 
+  button {
+    font-weight: bold;
+  }
+
