@@ -5,7 +5,7 @@ const baseURL = "https://rickandmortyapi.com/api/";
 let url;
 let firstEpisode;
 
-const getInfo = document.querySelector("form");
+const getInfo = document.querySelector("#form");
 const img = document.querySelector("img");
 const btn = document.querySelector('button');
 const ul = document.querySelector("ul");
@@ -13,27 +13,26 @@ const div = document.querySelector("div");
 let div1 = document.querySelector(".card");
 
 let ep;
-let characterNumber = document.querySelector("input");
 
-getInfo.addEventListener("submit", fetchCharacters);
+
+getInfo.addEventListener("click", fetchCharacters);
 
 function fetchCharacters(e) {
-    if (characterNumber.value > 494 || characterNumber.value === "" || characterNumber.value < 1) {
-        alert("Character doesn't exist. Please choose a character number BETWEEN 1-493!");
-    } else {
-        e.preventDefault();
+    e.preventDefault();
+    let characterNumber = Math.floor((Math.random() * 493) + 1);
+    
 
-        // console.log(e);
-        url = baseURL + "character/" + characterNumber.value + "/";
-        // console.log(url)
-        fetch(url).then(function(results) {
-            // console.log(results);
-            return results.json();
-        }).then(function(json) {
-            
-            displayResults(json);
-        });
-    }
+    // console.log(e);
+    url = baseURL + "character/" + characterNumber + "/";
+    // console.log(url)
+    fetch(url).then(function(results) {
+        // console.log(results);
+        return results.json();
+    }).then(function(json) {
+        
+        displayResults(json);
+    });
+    
 
     function displayResults(json) {
         while(div1.firstChild) {
